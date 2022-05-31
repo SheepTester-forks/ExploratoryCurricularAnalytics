@@ -42,10 +42,18 @@ for major in parse.majors:
                     quarter_eq = str(degree_plans[x].quarters[z]) == str(
                         degree_plans[y].quarters[z])
                     if (not quarter_eq):
-                        # now check if it's the overlaps_ge field
-                        print(
-                            f'Colleges {colleges[x]} and {colleges[y]} don\'t match in quarter {z+1}')
-                        print(
-                            f'College {colleges[x]}: {degree_plans[x].quarters[z]}')
-                        print(
-                            f'College {colleges[y]}: {degree_plans[y].quarters[z]}')
+                        # Check the quarter sizes are the same
+                        if (len(degree_plans[x].quarters[z]) != len(degree_plans[y].quarters[z])):
+                            print(
+                                f'Colleges {colleges[x]} and {colleges[y]} don\'t match in quarter {z+1}. They\'re different length')
+                            print(
+                                f'College {colleges[x]}: {degree_plans[x].quarters[z]}')
+                            print(
+                                f'College {colleges[y]}: {degree_plans[y].quarters[z]}')
+                        else:
+                            print(
+                                f'Colleges {colleges[x]} and {colleges[y]} don\'t match in quarter {z+1}.')
+                            print(
+                                f'College {colleges[x]}: {degree_plans[x].quarters[z]}')
+                            print(
+                                f'College {colleges[y]}: {degree_plans[y].quarters[z]}')
