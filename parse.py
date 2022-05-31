@@ -249,8 +249,8 @@ if __name__ == "__main__":
     #print(next(major for major in majors if major.major == "CS26").curriculum())
     #print(prereqs["MATH", "109"])
     #print(prereqs["MATH", "109"][0][0])
-    print(majors[0].curriculum("FI"))
-    print(majors[0].curriculum("MU"))
-    print(repr(majors[0].curriculum("RE")) == repr(majors[0].curriculum("MU")))
+    print(majors[0].major)
+    # print(majors[0].curriculum("MU"))
+    #print(repr(majors[0].curriculum("RE")) == repr(majors[0].curriculum("MU")))
     # print(majors[0].curriculum("RE").quarters[0] ==
     # majors[0].curriculum("MU").quarters[0])
