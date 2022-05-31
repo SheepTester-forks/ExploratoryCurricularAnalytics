@@ -1,5 +1,6 @@
 import parse
 
+
 for major in parse.majors:
 
     print(f'Testing {major.major}')
