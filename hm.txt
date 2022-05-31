@@ -1,0 +1,1 @@
+[PlannedCourse(course='ANTH 102', units=4.0, type='DEPARTMENT', overlaps_ge=False), PlannedCourse(course='ANBI CORE', units=4.0, type='DEPARTMENT', overlaps_ge=False)]

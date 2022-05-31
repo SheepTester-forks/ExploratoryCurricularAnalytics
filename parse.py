@@ -250,7 +250,7 @@ if __name__ == "__main__":
     #print(prereqs["MATH", "109"])
     #print(prereqs["MATH", "109"][0][0])
     # print(majors[0].major)
-    print(majors[0].curriculum("MU").quarters[11])
+    print(majors[0].curriculum("MU").quarters[11][0])
     #print(repr(majors[0].curriculum("RE")) == repr(majors[0].curriculum("MU")))
     # print(majors[0].curriculum("RE").quarters[0] ==
     # majors[0].curriculum("MU").quarters[0])
