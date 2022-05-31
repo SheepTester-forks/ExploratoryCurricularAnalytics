@@ -26,6 +26,8 @@ for major in parse.majors:
     TH_repr = repr(temp_curr_TH)
     WA_repr = repr(temp_curr_WA)
 
+    degree_plans = [temp_curr_RE, temp_curr_MU, temp_curr_FI,
+                    temp_curr_SI, temp_curr_SN, temp_curr_TH, temp_curr_WA]
     reprs = [RE_repr, MU_repr, FI_repr, SI_repr, SN_repr, TH_repr, WA_repr]
     colleges = ["RE", "MU", "FI", "SI", "SN", "TH", "WA"]
 
@@ -34,4 +36,9 @@ for major in parse.majors:
             #print(f'Testing colleges {colleges[x]}, vs {colleges[y]}')
             eq = reprs[x] == reprs[y]
             if(not eq):
-                print(f'Colleges {colleges[x]} and {colleges[y]} don\'t match')
+                #print(f'Colleges {colleges[x]} and {colleges[y]} don\'t match')
+                for z in range(12):
+                    quarter_eq = degree_plans[x].quarters[z] == degree_plans[y].quarters[z]
+                    if (not quarter_eq):
+                        print(
+                            f'Colleges {colleges[x]} and {colleges[y]} don\'t match in quarter {z+1}')
