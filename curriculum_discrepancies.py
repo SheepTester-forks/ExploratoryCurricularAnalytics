@@ -1,4 +1,22 @@
+from typing import List
 import parse
+
+
+def course_cmp(course1: parse.PlannedCourse, course2: parse.PlannedCourse) -> bool:
+    return (course1.course == course2.course) and (course1.units == course2.units) and (course1.type == course2.type)
+
+
+def set_cmp(list1: List[parse.PlannedCourse], list2: List[parse.PlannedCourse]) -> bool:
+    check = True
+    m_match = False
+    for m in list1:
+        m_match = False
+        for n in list2:
+            if (course_cmp(m, n)):
+                m_match = True
+                break
+        check = check and m_match
+    return check
 
 
 for major in parse.majors:
@@ -51,9 +69,13 @@ for major in parse.majors:
                             print(
                                 f'College {colleges[y]}: {degree_plans[y].quarters[z]}')
                         else:
-                            print(
-                                f'Colleges {colleges[x]} and {colleges[y]} don\'t match in quarter {z+1}.')
-                            print(
-                                f'College {colleges[x]}: {degree_plans[x].quarters[z]}')
-                            print(
-                                f'College {colleges[y]}: {degree_plans[y].quarters[z]}')
+                            list1 = degree_plans[x].quarters[z]
+                            list2 = degree_plans[y].quarters[z]
+                            if ((not set_cmp(list1, list2)) and (not set_cmp(list2, list1))):
+
+                                print(
+                                    f'Colleges {colleges[x]} and {colleges[y]} don\'t match in quarter {z+1}.')
+                                print(
+                                    f'College {colleges[x]}: {degree_plans[x].quarters[z]}')
+                                print(
+                                    f'College {colleges[y]}: {degree_plans[y].quarters[z]}')
