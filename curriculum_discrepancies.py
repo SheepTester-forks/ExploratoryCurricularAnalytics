@@ -2,6 +2,23 @@ from typing import List
 import parse
 
 
+def dei_issue(list1: List[parse.PlannedCourse], list2: List[parse.PlannedCourse]) -> bool:
+    its_a_dei_thing = False
+    if (len(list1) - len(list2) == 1):
+        for course in list1:
+            if course.course == "GE/DEI" or course.course == "DEI/GE":
+                list1.remove(course)
+                break
+        its_a_dei_thing = set_cmp(list1, list2)
+    elif (len(list1)-len(list2) == -1):
+        for course in list2:
+            if course.course == "GE/DEI" or course.course == "DEI/GE":
+                list2.remove(course)
+                break
+        its_a_dei_thing = set_cmp(list1, list2)
+    return its_a_dei_thing
+
+
 def course_cmp(course1: parse.PlannedCourse, course2: parse.PlannedCourse) -> bool:
     return (course1.course == course2.course) and (course1.units == course2.units) and (course1.type == course2.type)
 
@@ -52,30 +69,37 @@ for major in parse.majors:
 
     for x in range(7):
         for y in range(x+1, 7):
-            #print(f'Testing colleges {colleges[x]}, vs {colleges[y]}')
+            # print(f'Testing colleges {colleges[x]}, vs {colleges[y]}')
             eq = reprs[x] == reprs[y]
             if(not eq):
-                #print(f'Colleges {colleges[x]} and {colleges[y]} don\'t match')
+                # print(f'Colleges {colleges[x]} and {colleges[y]} don\'t match')
                 for z in range(12):
                     quarter_eq = str(degree_plans[x].quarters[z]) == str(
                         degree_plans[y].quarters[z])
                     if (not quarter_eq):
                         # Check the quarter sizes are the same
                         if (len(degree_plans[x].quarters[z]) != len(degree_plans[y].quarters[z])):
-                            print(
-                                f'Colleges {colleges[x]} and {colleges[y]} don\'t match in quarter {z+1}. They\'re different length')
-                            print(
-                                f'College {colleges[x]}: {degree_plans[x].quarters[z]}')
-                            print(
-                                f'College {colleges[y]}: {degree_plans[y].quarters[z]}')
-                        else:
-                            list1 = degree_plans[x].quarters[z]
-                            list2 = degree_plans[y].quarters[z]
-                            if ((not set_cmp(list1, list2)) and (not set_cmp(list2, list1))):
-
+                            dei = False
+                            dei = dei_issue(
+                                degree_plans[x].quarters[z], degree_plans[y].quarters[z])
+                            if (not dei):
                                 print(
-                                    f'Colleges {colleges[x]} and {colleges[y]} don\'t match in quarter {z+1}.')
+                                    f'Colleges {colleges[x]} and {colleges[y]} don\'t match in quarter {z+1}. They\'re different length')
                                 print(
                                     f'College {colleges[x]}: {degree_plans[x].quarters[z]}')
                                 print(
                                     f'College {colleges[y]}: {degree_plans[y].quarters[z]}')
+                        else:
+                            list1 = degree_plans[x].quarters[z]
+                            list2 = degree_plans[y].quarters[z]
+                            if ((not set_cmp(list1, list2)) and (not set_cmp(list2, list1))):
+                                dei = False
+                                dei = dei_issue(
+                                    degree_plans[x].quarters[z], degree_plans[y].quarters[z])
+                                if (not dei):
+                                    print(
+                                        f'Colleges {colleges[x]} and {colleges[y]} don\'t match in quarter {z+1}.')
+                                    print(
+                                        f'College {colleges[x]}: {degree_plans[x].quarters[z]}')
+                                    print(
+                                        f'College {colleges[y]}: {degree_plans[y].quarters[z]}')
