@@ -330,12 +330,12 @@ major_codes = major_rows_to_dict(
 )
 
 if __name__ == "__main__":
-    #print(prereqs["CAT", "1"])
-    #print(next(major for major in majors if major.major == "CS26").curriculum())
-    #print(prereqs["MATH", "109"])
-    #print(prereqs["MATH", "109"][0][0])
-    # print(majors[0].major)
-    print(majors[0].curriculum("MU").quarters[11][0])
-    #print(repr(majors[0].curriculum("RE")) == repr(majors[0].curriculum("MU")))
-    # print(majors[0].curriculum("RE").quarters[0] ==
-    # majors[0].curriculum("MU").quarters[0])
+    # print(prereqs["CAT", "1"])
+    # print(major_plans["CS26"].curriculum())
+    # print(prereqs["MATH", "109"])
+    # print(prereqs["MATH", "109"][0][0])
+    # print(major_plans["AN26"].major_code)
+    print(major_plans["AN26"].curriculum("MU"))
+    # print(repr(major_plans["AN26"].curriculum("RE")) == repr(major_plans["AN26"].curriculum("MU")))
+    # print(major_plans["AN26"].curriculum("RE") ==
+    # major_plans["AN26"].curriculum("MU"))

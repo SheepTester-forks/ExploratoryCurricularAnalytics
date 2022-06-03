@@ -1,18 +1,18 @@
-from typing import List
+from typing import Set
 import parse
 
 
-def dei_issue(list1: List[parse.PlannedCourse], list2: List[parse.PlannedCourse]) -> bool:
+def dei_issue(list1: Set[parse.PlannedCourse], list2: Set[parse.PlannedCourse]) -> bool:
     its_a_dei_thing = False
     if (len(list1) - len(list2) == 1):
         for course in list1:
-            if course.course == "GE/DEI" or course.course == "DEI/GE":
+            if course.course_code == "GE/DEI" or course.course_code == "DEI/GE":
                 list1.remove(course)
                 break
         its_a_dei_thing = set_cmp(list1, list2)
     elif (len(list1)-len(list2) == -1):
         for course in list2:
-            if course.course == "GE/DEI" or course.course == "DEI/GE":
+            if course.course_code == "GE/DEI" or course.course_code == "DEI/GE":
                 list2.remove(course)
                 break
         its_a_dei_thing = set_cmp(list1, list2)
@@ -20,10 +20,10 @@ def dei_issue(list1: List[parse.PlannedCourse], list2: List[parse.PlannedCourse]
 
 
 def course_cmp(course1: parse.PlannedCourse, course2: parse.PlannedCourse) -> bool:
-    return (course1.course == course2.course) and (course1.units == course2.units) and (course1.type == course2.type)
+    return (course1.course_code == course2.course_code) and (course1.units == course2.units) and (course1.type == course2.type)
 
 
-def set_cmp(list1: List[parse.PlannedCourse], list2: List[parse.PlannedCourse]) -> bool:
+def set_cmp(list1: Set[parse.PlannedCourse], list2: Set[parse.PlannedCourse]) -> bool:
     check = True
     m_match = False
     for m in list1:
@@ -36,13 +36,13 @@ def set_cmp(list1: List[parse.PlannedCourse], list2: List[parse.PlannedCourse]) 
     return check
 
 
-for major in parse.majors:
+for major in parse.major_plans.values():
 
-    print(f'Testing {major.major}')
-    if (major.major == "PS33"):
+    print(f'Testing {major.major_code}')
+    if (major.major_code == "PS33"):
         print("PS33 is weird, leave it alone")
         continue
-    if(major.major == "UN27" or major.major == "UNHA" or major.major == "UNPS" or major.major == "UNSS"):
+    if(major.major_code == "UN27" or major.major_code == "UNHA" or major.major_code == "UNPS" or major.major_code == "UNSS"):
         print("Undeclared is weird, leave it alone")
         continue
 
@@ -73,33 +73,32 @@ for major in parse.majors:
             eq = reprs[x] == reprs[y]
             if(not eq):
                 # print(f'Colleges {colleges[x]} and {colleges[y]} don\'t match')
-                for z in range(12):
-                    quarter_eq = str(degree_plans[x].quarters[z]) == str(
-                        degree_plans[y].quarters[z])
-                    if (not quarter_eq):
-                        # Check the quarter sizes are the same
-                        if (len(degree_plans[x].quarters[z]) != len(degree_plans[y].quarters[z])):
+                quarter_eq = str(degree_plans[x]) == str(
+                    degree_plans[y])
+                if (not quarter_eq):
+                    # Check the quarter sizes are the same
+                    if (len(degree_plans[x]) != len(degree_plans[y])):
+                        dei = False
+                        dei = dei_issue(
+                            degree_plans[x], degree_plans[y])
+                        if (not dei):
+                            print(
+                                f'Colleges {colleges[x]} and {colleges[y]} don\'t match. They\'re different length')
+                            print(
+                                f'College {colleges[x]}: {degree_plans[x]}')
+                            print(
+                                f'College {colleges[y]}: {degree_plans[y]}')
+                    else:
+                        list1 = degree_plans[x]
+                        list2 = degree_plans[y]
+                        if ((not set_cmp(list1, list2)) and (not set_cmp(list2, list1))):
                             dei = False
                             dei = dei_issue(
-                                degree_plans[x].quarters[z], degree_plans[y].quarters[z])
+                                degree_plans[x], degree_plans[y])
                             if (not dei):
                                 print(
-                                    f'Colleges {colleges[x]} and {colleges[y]} don\'t match in quarter {z+1}. They\'re different length')
+                                    f'Colleges {colleges[x]} and {colleges[y]} don\'t match.')
                                 print(
-                                    f'College {colleges[x]}: {degree_plans[x].quarters[z]}')
+                                    f'College {colleges[x]}: {degree_plans[x]}')
                                 print(
-                                    f'College {colleges[y]}: {degree_plans[y].quarters[z]}')
-                        else:
-                            list1 = degree_plans[x].quarters[z]
-                            list2 = degree_plans[y].quarters[z]
-                            if ((not set_cmp(list1, list2)) and (not set_cmp(list2, list1))):
-                                dei = False
-                                dei = dei_issue(
-                                    degree_plans[x].quarters[z], degree_plans[y].quarters[z])
-                                if (not dei):
-                                    print(
-                                        f'Colleges {colleges[x]} and {colleges[y]} don\'t match in quarter {z+1}.')
-                                    print(
-                                        f'College {colleges[x]}: {degree_plans[x].quarters[z]}')
-                                    print(
-                                        f'College {colleges[y]}: {degree_plans[y].quarters[z]}')
+                                    f'College {colleges[y]}: {degree_plans[y]}')
