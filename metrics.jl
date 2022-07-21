@@ -10,7 +10,7 @@ mutable struct CourseStats
 end
 
 output = open("./files/metrics.csv", "w")
-write(output, "Major,College,Number of GEs,Complexity,Max centrality,Max centrality course,Longest path,Elective units\n")
+write(output, "Major,College,Number of GEs,Complexity,Max centrality,Max centrality course,Longest path,Elective units, Total Units\n")
 flush(output)
 
 iselective(course::Course) = occursin(r"\belective\b"i, course.name) && !occursin(r"\bmuir\b"i, course.name)
@@ -30,9 +30,11 @@ for major in readdir("./files/output/")
       end
     end
     # Convert to curriculum
+    # Is this necessary? the plan has a curriculum already generated. 
     curriculum = Curriculum(plan.name, [course for term in plan.terms for course in term.courses])
     try
       basic_metrics(curriculum)
+      basic_metrics(plan)
     catch error
       # BoundsError: attempt to access 0-element Vector{Vector{Course}} at index [1]
       # For curricula like AN26 with no prerequisites, presumably
@@ -64,6 +66,7 @@ for major in readdir("./files/output/")
     write(output, ",$(curriculum.metrics["max. centrality courses"][1].name)")
     write(output, isempty(curriculum.metrics["longest paths"]) ? "," : ",$(length(curriculum.metrics["longest paths"][1]))")
     write(output, ",$electives")
+    write(output, ",$(plan.metrics["total credit hours"])")
     write(output, "\n")
     flush(output)
 
