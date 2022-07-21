@@ -33,8 +33,8 @@ for major in readdir("./files/output/")
     # Is this necessary? the plan has a curriculum already generated. 
     curriculum = Curriculum(plan.name, [course for term in plan.terms for course in term.courses])
     try
-      basic_metrics(curriculum)
       basic_metrics(plan)
+      basic_metrics(curriculum)
     catch error
       # BoundsError: attempt to access 0-element Vector{Vector{Course}} at index [1]
       # For curricula like AN26 with no prerequisites, presumably
