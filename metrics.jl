@@ -20,7 +20,7 @@ mutable struct CourseStats
 end
 
 output = open("./files/metrics.csv", "w")
-write(output, "Major,College,Number of GEs,Complexity,Max centrality,Max centrality course,Longest path,Elective units, Total Units, Highest Unit Term Load, Highest Unit Term, Lowest Unit Term Load, Lowest Unit Term, Units not in Major, Units in Major\n")
+write(output, "Major,College,Number of GEs,Complexity,Max centrality,Max centrality course,Longest path,Elective units, Total Units, Highest Unit Term Load, Highest Unit Term, Lowest Unit Term Load, Lowest Unit Term, Units not in Major, Units in Major, Max Complexity, Max Complexity Course\n")
 flush(output)
 
 iselective(course::Course) = occursin(r"\belective\b"i, course.name) && !occursin(r"\bmuir\b"i, course.name)
@@ -83,6 +83,8 @@ for major in readdir("./files/output/")
     write(output, ",$(plan.metrics["min. credit term"])")
     write(output, ",$(non_major_unit_count(plan))")
     write(output, ",$(plan.credit_hours - non_major_unit_count(plan))")
+    write(output, ",$(curriculum.metrics["max. complexity"])")
+    write(output, ",$(curriculum.metrics["max. centrality courses"][1].name)")
     write(output, "\n")
     flush(output)
 
