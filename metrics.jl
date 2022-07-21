@@ -4,13 +4,23 @@ colleges = ["RE", "MU", "TH", "WA", "FI", "SI", "SN"]
 
 courses = Dict()
 
+function non_major_unit_count(plan::DegreePlan)
+  non_major_unit_count = 0
+  if (isdefined(plan, :additional_courses))
+    for course in plan.additional_courses
+      non_major_unit_count += course.credit_hours
+    end
+  end
+  non_major_unit_count
+end
+
 mutable struct CourseStats
   max_centrality::Int
   max_centrality_major::String
 end
 
 output = open("./files/metrics.csv", "w")
-write(output, "Major,College,Number of GEs,Complexity,Max centrality,Max centrality course,Longest path,Elective units, Total Units, Highest Unit Term Load, Highest Unit Term, Lowest Unit Term Load, Lowest Unit Term\n")
+write(output, "Major,College,Number of GEs,Complexity,Max centrality,Max centrality course,Longest path,Elective units, Total Units, Highest Unit Term Load, Highest Unit Term, Lowest Unit Term Load, Lowest Unit Term, Units not in Major, Units in Major\n")
 flush(output)
 
 iselective(course::Course) = occursin(r"\belective\b"i, course.name) && !occursin(r"\bmuir\b"i, course.name)
@@ -66,11 +76,13 @@ for major in readdir("./files/output/")
     write(output, ",$(curriculum.metrics["max. centrality courses"][1].name)")
     write(output, isempty(curriculum.metrics["longest paths"]) ? "," : ",$(length(curriculum.metrics["longest paths"][1]))")
     write(output, ",$electives")
-    write(output, ",$(plan.metrics["total credit hours"])")
+    write(output, ",$(plan.metrics["total credit hours"])") # or plan.credit_hours
     write(output, ",$(plan.metrics["max. credits in a term"])")
     write(output, ",$(plan.metrics["max. credit term"])")
     write(output, ",$(plan.metrics["min. credits in a term"])")
     write(output, ",$(plan.metrics["min. credit term"])")
+    write(output, ",$(non_major_unit_count(plan))")
+    write(output, ",$(plan.credit_hours - non_major_unit_count(plan))")
     write(output, "\n")
     flush(output)
 
