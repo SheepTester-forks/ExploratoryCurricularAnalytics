@@ -20,7 +20,7 @@ mutable struct CourseStats
 end
 
 output = open("./files/metrics.csv", "w")
-write(output, "Major,College,Number of GEs,Complexity,Max centrality,Max centrality course,Longest path,Elective units, Total Units, Highest Unit Term Load, Highest Unit Term, Lowest Unit Term Load, Lowest Unit Term, Units not in Major, Units in Major, Max Complexity, Max Complexity Course\n")
+write(output, "Major,College,Number of GEs,Complexity,Max centrality,Max centrality course,Longest path,Elective units, Total Units, Highest Unit Term Load, Highest Unit Term, Lowest Unit Term Load, Lowest Unit Term, Units not in Major, Units in Major, Max Complexity, Max Complexity Course, Total Number of Courses, Number of Courses with no Prereqs\n")
 flush(output)
 
 iselective(course::Course) = occursin(r"\belective\b"i, course.name) && !occursin(r"\bmuir\b"i, course.name)
@@ -85,6 +85,8 @@ for major in readdir("./files/output/")
     write(output, ",$(plan.credit_hours - non_major_unit_count(plan))")
     write(output, ",$(curriculum.metrics["max. complexity"])")
     write(output, ",$(curriculum.metrics["max. centrality courses"][1].name)")
+    write(output, ",$(curriculum.num_courses)")
+    write(output, ",$(length( filter(x-> x==1, curriculum.metrics["delay factor"][2])))") # courses with a delay factor of 1 are the only course in the longest path they're in, i.e. have no prereqs AND no unblocked classes (hence they satisfy the condition no prereqs)
     write(output, "\n")
     flush(output)
 
