@@ -40,8 +40,8 @@ for major in readdir("./files/output/")
       end
     end
     # Convert to curriculum
-    # Is this necessary? the plan has a curriculum already generated. 
-    curriculum = Curriculum(plan.name, [course for term in plan.terms for course in term.courses])
+    # Is this necessary? the plan has a curriculum already generated. either way, make it a quarter type to scale by 0.7
+    curriculum = Curriculum(plan.name, [course for term in plan.terms for course in term.courses], system_type=quarter)
     try
       basic_metrics(plan)
       basic_metrics(curriculum)
