@@ -1,3 +1,11 @@
+# Outputs a CSV of every course in every year-major and lists its metrics in the
+# curriculum (based on Marshall's degree plan). This is for reports #1, #2, and
+# #3.
+#
+# ::tableau::new
+#
+# julia CourseMetrics.jl
+
 module CourseMetrics
 
 include("Output.jl")

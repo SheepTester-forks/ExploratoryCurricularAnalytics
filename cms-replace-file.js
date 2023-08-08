@@ -1,4 +1,12 @@
-// Run in the CMS folder view to replace HTML reports
+/**
+ * @file browser script (copypaste and run in console) that adds a file input to
+ * every entry on UCSD's CMS that allows me to upload a large HTML file to
+ * overwrite an existing file.
+ *
+ * Run in the CMS folder view to replace HTML reports.
+ *
+ * ::web
+ */
 
 async function writeFile (fileId, contents, message) {
   const submittedFormIdentifier = (

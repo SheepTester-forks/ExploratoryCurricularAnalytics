@@ -1,4 +1,9 @@
 """
+Outputs a CSV or HTML table of every major and the number of non-elective GE
+units per college's degree plan.
+
+::ge
+
 python3 college_ges.py > college_ges.csv
 python3 college_ges.py html > reports/output/college-ge-units-fragment.html
 """

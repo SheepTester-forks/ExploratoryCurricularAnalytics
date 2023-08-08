@@ -2,11 +2,17 @@
 Loads department codes and names from a JSON file saved from plans.ucsd.edu:
 https://plans.ucsd.edu/controller.php?action=LoadSearchControls
 
+departments.txt was created by department_names.py, not departments.py.
+
 Exports:
     `departments`, a dictionary mapping from department codes to their names.
 
     `dept_schools`, a dictionary mapping from department codes to the name of
     the school they're part of.
+
+::ca::data
+
+python3 departments.py
 """
 
 import json

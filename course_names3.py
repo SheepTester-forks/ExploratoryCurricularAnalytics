@@ -1,5 +1,14 @@
 """
-Based on https://www.overleaf.com/project/62e8265ff1395d787286ea5b
+Runs [Arturo's course name cleanup
+algorithm](https://www.overleaf.com/project/62e8265ff1395d787286ea5b) on every
+unique course title, and lists all resulting unique cleaned course titles. The
+goal with this is to reduce variability in course titles resulting from college
+advisors phrasing things differently.
+
+This supercedes the old aggressive course title cleanup algorithm that was
+tested by course_names2.py.
+
+::ca::check
 
 python3 course_names3.py > course_names3.txt
 """

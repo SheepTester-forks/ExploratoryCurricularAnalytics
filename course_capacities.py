@@ -1,4 +1,10 @@
 """
+Takes the number of incoming first years in each major-college and the number of
+seats left in each course and outputs the number of seats needed for freshmen
+and seats available for each course. Eighth first-years are ignored.
+
+::seats::python
+
 python3 course_capacities.py > files/course_capacities_output.csv
 """
 

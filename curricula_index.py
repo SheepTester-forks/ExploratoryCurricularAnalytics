@@ -1,4 +1,10 @@
 """
+Created a CSV file with the URL of every year-major pair, including the
+department and school of the major. This was for the list of uploaded Curricular
+Analytics curriculum links.
+
+::tableau::new
+
 python3 curricula_index.py > files/curricula_index.csv
 """
 

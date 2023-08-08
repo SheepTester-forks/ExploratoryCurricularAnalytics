@@ -1,4 +1,15 @@
 """
+Attempted to clean up course titles more aggressively, mostly to match the
+example CSV files we were given.
+
+However, by removing `GE`, `AWP`, and `DEI`, this ended up removing useful
+context from the plans. For example, some plans had something like two instances
+of "MCWP 40/GE," but on Curricular Analytics, this appeared as two MCWP 40
+courses, which looks like an error. The rewrite of parse.py does not do this
+anymore I believe.
+
+::ca::check
+
 python3 course_names2.py > course_names2.txt
 """
 

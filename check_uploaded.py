@@ -1,3 +1,14 @@
+"""
+Checks every major uploaded onto Curricular Analytics. For some reason, if
+curricula are uploaded too quickly to Curricular Analytics, they end up with
+blank degree plans. This happened for curricula uploaded earlier before I
+realized I set the delay time too short.
+
+::ca::upload
+
+python3 check_uploaded.py
+"""
+
 import os
 
 from dotenv import load_dotenv  # type: ignore

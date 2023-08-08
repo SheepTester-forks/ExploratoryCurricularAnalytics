@@ -1,3 +1,11 @@
+"""
+Compares the list of unique department codes of the degree plans available with the department codes from the ISIS major code spreadsheet. This is to figure out which department names I don't need to get the name for.
+
+::ca::check
+
+python3 department_names.py
+"""
+
 from parse import major_codes, major_plans
 
 
@@ -29,4 +37,5 @@ for dept in from_codes[j:]:
 # academic_plans.csv, which makes sense
 print(from_plans)
 
-print(sorted(set(major.major_code[0:2] for major in major_plans(2021).values())))
+codes = sorted(set(major.major_code[0:2] for major in major_plans(2021).values()))
+print(codes)

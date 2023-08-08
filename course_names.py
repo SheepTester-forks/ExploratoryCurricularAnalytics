@@ -1,4 +1,10 @@
 """
+Listed every unique course title (cleaned up a bit) with its parsed course code.
+This was to test `parse_course_name` (which turns `BICD110` into `("BICD",
+"110")` but not `IE1` into `("IE", "1")`) as well as `clean_course_title`.
+
+::ca::check
+
 python3 course_names.py > course_names.txt
 """
 

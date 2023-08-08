@@ -1,5 +1,8 @@
 """
-Output a JSON file with the specified curriculum to stdout.
+Output a JSON file with the specified curriculum to stdout. This was intended to
+be compared with equivalent output from Python.
+
+::ca::check
 
 julia DebugOutput.jl 2016 BI29
 julia DebugOutput.jl 2016 BI29 SI

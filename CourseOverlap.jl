@@ -1,3 +1,12 @@
+# Lists the percent overlap of courses for every ordered major pair and year,
+# for report #4. It's an ordered pair because the way I calculated percent
+# overlap wasn't commutative; it used the first major's number of courses in the
+# denominator of the percentage.
+#
+# ::tableau::new
+#
+# julia CourseOverlap.jl
+
 module CourseOverlap
 
 include("Parse.jl")

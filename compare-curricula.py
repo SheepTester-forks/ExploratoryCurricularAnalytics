@@ -1,3 +1,14 @@
+"""
+Compares, for each major, every college's degree plan (major courses only)
+against each other, and listed the differences in courses in comparisons.txt. I
+found that Marshall had the least deviations overall, so Marshall's degree plans
+are used to create curricula.
+
+::ca::check
+
+python3 compare-curricula.py
+"""
+
 import itertools
 import re
 from typing import List, Tuple

@@ -1,3 +1,10 @@
+"""
+Defines helper methods that interface directly with Curricular Analytics'
+internal API. Think of it like discord.js but for Curricular Analytics.
+
+::ca::main
+"""
+
 from http.client import HTTPResponse
 import json
 import re

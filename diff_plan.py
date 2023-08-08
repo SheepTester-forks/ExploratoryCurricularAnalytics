@@ -1,5 +1,11 @@
 """
-This is run by the Makefile.
+This is run by the Makefile. Pretty-prints the changes made to the given
+major-college degree plan over the years. This also outputs a JSON file of diffs
+for every major-college combo for the web app that I made. Uses
+files/metrics_fa12.csv (rather than PlanChanges.jl) to include complexity score
+changes.
+
+::plan-diff::main
 
 python3 diff_plan.py > reports/output/academic-plan-diffs.json
 """

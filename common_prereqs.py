@@ -1,3 +1,13 @@
+"""
+Identifies common prereqs across all courses in a subject. This was to figure
+out if there were any exceptions other than the provided `SOCI- UD METHODOLOGY`
+and `TDHD XXX`.
+
+::ca::check
+
+python3 common_prereqs.py
+"""
+
 from typing import Dict, Tuple
 from parse import prereqs
 from parse_defs import CourseCode
