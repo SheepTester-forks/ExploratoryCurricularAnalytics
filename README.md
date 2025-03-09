@@ -1,6 +1,6 @@
-> [!NOTE]
+> [!IMPORTANT]
 > Because this fork has diverged significantly from the [original repo](https://github.com/ArturoAmaya/ExploratoryCurricularAnalytics), I've made a hard fork at
-> [SheepTester-forks/ExploratoryCurricularAnalytics](https://github.com/SheepTester-forks/ExploratoryCurricularAnalytics).
+> [**SheepTester-forks/curricular-analytics-exploration**](https://github.com/SheepTester-forks/curricular-analytics-exploration).
 > Development continues there.
 
 # Curricular Analytics exploration
